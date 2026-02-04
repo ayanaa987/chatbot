@@ -1,0 +1,362 @@
+/* ================= ROOT ================= */
+* {
+  box-sizing: border-box;
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont;
+}
+
+/* ================= FLOATING CHAT ICON (GLOBAL) ================= */
+.floating-chat-icon {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+
+  width: 58px;
+  height: 40px;
+  border-radius: 50%;
+
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  color: #fff;
+  border: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  z-index: 10000;
+
+  box-shadow: 0 14px 35px rgba(37, 99, 235, 0.45);
+  animation: pulse 2s infinite;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.floating-chat-icon:hover {
+  transform: scale(1.1);
+  box-shadow: 0 18px 45px rgba(37, 99, 235, 0.55);
+}
+
+/* Pulse animation */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 18px rgba(37, 99, 235, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
+  }
+}
+
+/* ================= CHAT WIDGET ================= */
+.chat-widget {
+  position: fixed;
+  bottom: 72px; /* leaves space for floating icon */
+  right: 24px;
+
+  width: 360px;
+  height: 505px;
+  background: #fff;
+  border-radius: 16px;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  animation: slideUp 0.4s ease;
+  z-index: 9999;
+}
+
+.chat-widget.minimized {
+  height: 70px;
+}
+
+/* ================= ANIMATION ================= */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================= HEADER ================= */
+.chat-header {
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  color: #fff;
+  padding: 14px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bot-avatar {
+  width: 38px;
+  height: 38px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-left h4 {
+  margin: 0;
+  font-size: 15px;
+}
+
+.status {
+  font-size: 11px;
+  opacity: 0.9;
+}
+
+.header-actions svg {
+  cursor: pointer;
+  margin-left: 10px;
+  transition: transform 0.2s ease;
+}
+
+.header-actions svg:hover {
+  transform: scale(1.15);
+}
+
+/* ================= BODY ================= */
+.chat-body {
+  flex: 1;
+  padding: 14px;
+  overflow-y: auto;
+  background: #f8fafc;
+}
+
+/* ================= MESSAGES ================= */
+.msg {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.msg.user {
+  justify-content: flex-end;
+}
+
+.msg.bot {
+  justify-content: flex-start;
+}
+
+.bubble {
+  max-width: 75%;
+  padding: 10px 14px;
+  border-radius: 16px;
+  font-size: 14px;
+  line-height: 1.4;
+  position: relative;
+}
+
+.msg.user .bubble {
+  background: #2563eb;
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+.msg.bot .bubble {
+  background: #e5e7eb;
+  color: #111;
+  border-bottom-left-radius: 4px;
+}
+
+.time {
+  display: block;
+  font-size: 10px;
+  margin-top: 4px;
+  opacity: 0.6;
+}
+
+/* ================= QUICK OPTIONS ================= */
+.options {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.options button {
+  border: none;
+  background: #fff;
+  color: #2563eb;
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: background 0.2s ease;
+}
+
+.options button:hover {
+  background: #e0e7ff;
+}
+
+/* ================= TYPING INDICATOR ================= */
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 0;
+}
+
+.typing-indicator span {
+  width: 8px;
+  height: 8px;
+  background: #9ca3af;
+  border-radius: 50%;
+  animation: blink 1.4s infinite both;
+}
+
+.typing-indicator span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0.2;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+
+/* ================= INPUT ================= */
+.chat-input {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-top: 1px solid #e5e7eb;
+  background: #fff;
+}
+
+.chat-input input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.chat-input button {
+  background: none;
+  border: none;
+  color: #2563eb;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 6px;
+}
+
+.chat-input button.send {
+  color: #1e40af;
+}
+
+/* ================= SCROLLBAR ================= */
+.chat-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-body::-webkit-scrollbar-thumb {
+  background: #c7d2fe;
+  border-radius: 10px;
+}
+
+/* ================= MOBILE RESPONSIVE ================= */
+@media (max-width: 480px) {
+  .chat-widget {
+    width: 100%;
+    height: 100%;
+    right: 0;
+    bottom: 0;
+    border-radius: 0;
+  }
+
+  .floating-chat-icon {
+    bottom: 16px;
+    right: 16px;
+  }
+}
+
+/* ================= BOT MESSAGE TEXT HIGHLIGHTING ================= */
+
+/* Make first line bold (titles like "Ninzex Solutions") */
+.msg.bot .bubble {
+  white-space: pre-line; /* IMPORTANT */
+}
+
+/* First line = main heading */
+.msg.bot .bubble::first-line {
+  font-weight: 500;
+  color: #0f172a;
+}
+
+/* Section headings (lines ending with Services / Overview / Support) */
+.msg.bot .bubble {
+  line-height: 1.6;
+}
+
+/* Highlight common important keywords */
+.msg.bot .bubble {
+  font-weight: 400;
+}
+
+/* Service & section keywords */
+.msg.bot .bubble {
+  --highlight: #1e40af;
+}
+
+.msg.bot .bubble:has(:not(*)) {
+  /* no-op to keep compatibility */
+}
+
+/* Manual keyword highlighting using attribute selectors */
+.msg.bot .bubble {
+  font-feature-settings: "liga" 1;
+}
+
+/* IMPORTANT KEYWORDS (CSS-only trick using text-shadow) */
+.msg.bot .bubble {
+  text-shadow: 0 0 0 #848484;
+}
+
+/* Simulated highlight for known headings */
+.msg.bot .bubble:contains("Our Services"),
+.msg.bot .bubble:contains("Website Development"),
+.msg.bot .bubble:contains("Digital Marketing"),
+.msg.bot .bubble:contains("Hardware & IT Support"),
+.msg.bot .bubble:contains("Pricing Overview"),
+.msg.bot .bubble:contains("CRM Development"),
+.msg.bot .bubble:contains("SEO Services"),
+.msg.bot .bubble:contains("AI Solutions"),
+.msg.bot .bubble:contains("Book a Demo"),
+.msg.bot .bubble:contains("Talk to") {
+  font-weight: 700;
+  color: #2563eb;
+}

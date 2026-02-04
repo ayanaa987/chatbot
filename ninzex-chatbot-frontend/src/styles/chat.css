@@ -1,0 +1,41 @@
+.flip-card {
+  background: #f7f7f7;
+  padding: 10px 15px;
+  margin: 8px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.flip-card h4 {
+  margin: 0 0 5px 0;
+  color: #007bff;
+}
+
+.options-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 5px;
+}
+
+.options-container button {
+  padding: 6px 12px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.options-container button:hover {
+  background-color: #218838;
+}
+
+body,
+html,
+#root {
+  background-color: #fff;
+  color: #000;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
