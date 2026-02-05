@@ -12,7 +12,10 @@ import {
 } from "react-icons/fi";
 import { BsRobot } from "react-icons/bs";
 import "./Chatbot.css";
-const API_URL = import.meta.env.VITE_API_URL;
+
+// ✅ Use environment variable for backend API URL
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(true);
   const [minimized, setMinimized] = useState(false);
@@ -24,11 +27,11 @@ const Chatbot = () => {
   const chatEndRef = useRef(null);
 
   const [sessionId, setSessionId] = useState(
-    localStorage.getItem("sessionId") || Date.now().toString(),
+    localStorage.getItem("sessionId") || Date.now().toString()
   );
 
   const [messages, setMessages] = useState(
-    JSON.parse(localStorage.getItem("chatMessages")) || [],
+    JSON.parse(localStorage.getItem("chatMessages")) || []
   );
 
   const [input, setInput] = useState("");
@@ -112,7 +115,7 @@ const Chatbot = () => {
     if (messages.length === 0) {
       resetChat();
     }
-  }, [messages.length, resetChat]);
+  }, [messages.length]);
 
   /* ================= SEND ================= */
   const sendMessage = async (customMsg) => {
@@ -129,9 +132,9 @@ const Chatbot = () => {
 
     try {
       const res = await axios.post(`${API_URL}/chat/`, {
-  session_id: sessionId,
-  message: msg,
-});
+        session_id: sessionId,
+        message: msg,
+      });
 
       setTyping(false);
 
@@ -281,4 +284,3 @@ const Chatbot = () => {
 };
 
 export default Chatbot;
-
