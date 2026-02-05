@@ -12,7 +12,7 @@ import {
 } from "react-icons/fi";
 import { BsRobot } from "react-icons/bs";
 import "./Chatbot.css";
-
+const API_URL = import.meta.env.VITE_API_URL;
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(true);
   const [minimized, setMinimized] = useState(false);
@@ -128,10 +128,10 @@ const Chatbot = () => {
     setTyping(true);
 
     try {
-      const res = await axios.post("http://127.0.0.1:8000/chat/", {
-        session_id: sessionId,
-        message: msg,
-      });
+      const res = await axios.post(`${API_URL}/chat/`, {
+  session_id: sessionId,
+  message: msg,
+});
 
       setTyping(false);
 
@@ -281,3 +281,4 @@ const Chatbot = () => {
 };
 
 export default Chatbot;
+
